@@ -1,11 +1,29 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useMemo, useState } from 'react'
+import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
+
+const useStore = create(
+  persist(
+    (set) => ({
+      todos: [],
+      addTodo: (todo) =>
+        set((state) => ({
+          todos: [...state.todos, todo],
+        })),
+    }),
+    {
+      name: 'todos-storage',
+    }
+  )
+)
 
 function App() {
-  const [todos, setTodos] = useLocalStorage('todos', [])
+  const todos = useStore((state) => state.todos)
+  const addTodo = useStore((state) => state.addTodo)
 
   const handleAddTodo = (todo) => {
-    setTodos([...todos, { key: window.crypto.randomUUID(), body: todo }])
+    addTodo({ key: window.crypto.randomUUID(), body: todo })
   }
 
   return (
@@ -79,15 +97,5 @@ function slowFunction(a) {
   return a * 2
 }
 
-function useLocalStorage(storageKey, fallbackState) {
-  const [state, setState] = useState(
-    JSON.parse(localStorage.getItem(storageKey)) ?? fallbackState
-  )
-  const stateSetter = (newState) => {
-    localStorage.setItem(storageKey, JSON.stringify(newState))
-    setState(newState)
-  }
-  return [state, stateSetter]
-}
-
 export default App
+
