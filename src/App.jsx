@@ -50,12 +50,16 @@ function App() {
 function TodoList({ todos }) {
   const sortedTodos = todos.toSorted((a, b) => Number(a.done) - Number(b.done))
   const todoElements = sortedTodos.map((todo) => (
-    <li key={todo.key}>
+    <li key={todo.key} className='mx-5'>
       <Todo todo={todo} />
     </li>
   ))
 
-  return <ul className="max-h-96 flex flex-col gap-y-3">{todoElements}</ul>
+  return (
+    <ul className="max-h-96 flex flex-col gap-y-3 overflow-y-auto ring-1 ring-gray-200 rounded-lg py-5">
+      {todoElements}
+    </ul>
+  )
 }
 
 function Todo({ todo }) {
@@ -76,7 +80,7 @@ function Todo({ todo }) {
   return (
     <div
       className={
-        'flex ring-1 ring-gray-200 rounded-lg ' +
+        'flex ring-1 ring-gray-200 rounded-lg w-full ' +
         (done ? 'bg-gray-100 hover:bg-gray-200' : 'hover:bg-gray-50 ')
       }
     >
