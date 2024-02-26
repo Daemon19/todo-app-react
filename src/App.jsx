@@ -50,7 +50,7 @@ function App() {
 function TodoList({ todos }) {
   const sortedTodos = todos.toSorted((a, b) => Number(a.done) - Number(b.done))
   const todoElements = sortedTodos.map((todo) => (
-    <li key={todo.key} className='mx-5'>
+    <li key={todo.key} className="mx-5">
       <Todo todo={todo} />
     </li>
   ))
@@ -86,15 +86,17 @@ function Todo({ todo }) {
     >
       <button
         onClick={handleDeleteTodo}
-        className="text-xl z-10 bg-white hover:bg-red-500 text-red-500 hover:text-white size-10 ring-1 ring-red-500"
+        className="text-xl z-10 bg-white hover:bg-red-500 text-red-500 hover:text-white p-2 ring-1 ring-red-500"
       >
         <FaXmark className="mx-auto" />
       </button>
       <p
         onContextMenu={handleContextmenu}
-        className={
-          'basis-full pl-3 align-middle' + (done ? ' line-through ' : '')
-        }
+        // Tailwindcss's "break-words" class will not work ¯\_(ツ)_/¯
+        style={{
+          wordBreak: 'break-word',
+        }}
+        className={'p-3 w-full ' + (done ? 'line-through ' : '')}
       >
         {body}
       </p>
