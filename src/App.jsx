@@ -88,7 +88,7 @@ function Todo({ todo }) {
     >
       <button
         onClick={handleDeleteTodo}
-        className="text-xl z-10 bg-white hover:bg-red-500 text-red-500 hover:text-white p-2 ring-1 ring-red-500"
+        className="text-xl z-10 bg-white hover:bg-red-500 text-red-500 hover:text-white p-2 ring-1 ring-red-500 transition-all ease-in"
       >
         <FaXmark className="mx-auto" />
       </button>
