@@ -76,7 +76,7 @@ function Todo({ todo }) {
 
   return (
     <div className={'flex gap-x-3 w-full p-3 '}>
-      <button onClick={handleToggleDone} className="text-xl">
+      <button onClick={handleToggleDone} className="text-xl text-gray-400 hover:text-black transition-all ease-in">
         {done ? <FaRegCircleCheck /> : <FaRegCircle />}
       </button>
       <p
