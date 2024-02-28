@@ -1,7 +1,12 @@
 /* eslint-disable react/prop-types */
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { FaPlus, FaRegCircle, FaRegCircleCheck } from 'react-icons/fa6'
+import {
+  FaPlus,
+  FaRegCircle,
+  FaRegCircleCheck,
+  FaRegTrashCan,
+} from 'react-icons/fa6'
 
 const useStore = create(
   persist(
@@ -76,7 +81,10 @@ function Todo({ todo }) {
 
   return (
     <div className={'flex gap-x-3 w-full p-3 '}>
-      <button onClick={handleToggleDone} className="text-xl text-gray-400 hover:text-black transition-all ease-in">
+      <button
+        onClick={handleToggleDone}
+        className="text-xl text-gray-400 hover:text-black transition-all ease-in"
+      >
         {done ? <FaRegCircleCheck /> : <FaRegCircle />}
       </button>
       <p
@@ -88,6 +96,9 @@ function Todo({ todo }) {
       >
         {body}
       </p>
+      <button onClick={handleDeleteTodo} className='text-xl text-red-600'>
+        <FaRegTrashCan />
+      </button>
     </div>
   )
 }
