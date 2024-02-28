@@ -80,7 +80,7 @@ function Todo({ todo }) {
   }
 
   return (
-    <div className={'flex gap-x-3 w-full py-5 '}>
+    <div className="flex gap-x-3 w-full py-5 group">
       <button
         onClick={handleToggleDone}
         className="text-xl text-gray-400 hover:text-black transition-all ease-in"
@@ -96,7 +96,10 @@ function Todo({ todo }) {
       >
         {body}
       </p>
-      <button onClick={handleDeleteTodo} className='text-xl text-red-600'>
+      <button
+        onClick={handleDeleteTodo}
+        className="text-xl text-red-600 invisible group-hover:visible"
+      >
         <FaRegTrashCan />
       </button>
     </div>
