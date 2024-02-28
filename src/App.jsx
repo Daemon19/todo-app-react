@@ -62,7 +62,7 @@ function TodoList({ todos }) {
     </li>
   ))
 
-  return <ul className="flex flex-col divide-y gap-y-3">{todoElements}</ul>
+  return <ul className="flex flex-col divide-y">{todoElements}</ul>
 }
 
 function Todo({ todo }) {
@@ -80,7 +80,7 @@ function Todo({ todo }) {
   }
 
   return (
-    <div className={'flex gap-x-3 w-full p-3 '}>
+    <div className={'flex gap-x-3 w-full py-5 '}>
       <button
         onClick={handleToggleDone}
         className="text-xl text-gray-400 hover:text-black transition-all ease-in"
