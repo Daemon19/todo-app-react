@@ -19,6 +19,12 @@ export const useStore = create(
         set((state) => ({
           todos: state.todos.filter((todo) => todo.key !== todoKey),
         })),
+      editTodo: (todoKey, newBody) =>
+        set((state) => ({
+          todos: state.todos.map((todo) =>
+            todo.key === todoKey ? { ...todo, body: newBody } : todo
+          ),
+        })),
     }),
     {
       name: 'todos-storage',
