@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useStore } from './useStore'
 import { TodoList } from './TodoList'
 import { TodoForm } from './TodoForm'
