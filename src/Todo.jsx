@@ -59,13 +59,13 @@ export function Todo({ todo }) {
           </p>
           <button
             onClick={handleEditTodo}
-            className="text-xl text-gray-600 invisible group-hover:visible"
+            className="text-xl text-gray-600 rounded-lg p-2 invisible transition ease-in duration-75 group-hover:visible hover:bg-gray-100"
           >
             <FaRegPenToSquare />
           </button>
           <button
             onClick={handleDeleteTodo}
-            className="text-xl text-red-600 invisible group-hover:visible"
+            className="text-xl text-red-600 rounded-lg p-2 invisible transition ease-in duration-75 group-hover:visible hover:bg-gray-100"
           >
             <FaRegTrashCan />
           </button>{' '}
