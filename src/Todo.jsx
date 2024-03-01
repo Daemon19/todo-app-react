@@ -1,6 +1,6 @@
 import {
+  FaCircleCheck,
   FaRegCircle,
-  FaRegCircleCheck,
   FaRegPenToSquare,
   FaRegTrashCan,
 } from 'react-icons/fa6'
@@ -46,7 +46,7 @@ export function Todo({ todo }) {
             onClick={handleToggleDone}
             className="text-xl text-gray-400 hover:text-black transition-all ease-in"
           >
-            {done ? <FaRegCircleCheck /> : <FaRegCircle />}
+            {done ? <FaCircleCheck /> : <FaRegCircle />}
           </button>
           <p
             // Tailwindcss's "break-words" class will not work ¯\_(ツ)_/¯
