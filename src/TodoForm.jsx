@@ -1,8 +1,8 @@
 import { FaPlus } from 'react-icons/fa6'
-import { useSWRConfig } from 'swr'
+import useTodos from './hooks/useTodos'
 
 export function TodoForm() {
-  const { mutate } = useSWRConfig()
+  const { mutate } = useTodos()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -20,7 +20,7 @@ export function TodoForm() {
     )
     const body = await res.json()
     const todo = { id: body.data.id, title: body.data.attributes.title }
-    mutate('/todos', (todos) => [...todos, todo])
+    mutate((todos) => [...todos, todo])
     e.target.reset()
   }
 
