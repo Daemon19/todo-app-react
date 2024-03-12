@@ -17,7 +17,6 @@ export function Todo({ todo }) {
   const [isEditing, setIsEditing] = useState(false)
 
   const toggleDone = useStore((state) => state.toggleDone)
-  const deleteTodo = useStore((state) => state.deleteTodo)
 
   const { mutate: mutateTodos } = useTodos()
 
@@ -29,8 +28,11 @@ export function Todo({ todo }) {
     setIsEditing(true)
   }
 
-  const handleDeleteTodo = () => {
-    deleteTodo(id)
+  const handleDeleteTodo = async () => {
+    await fetch(new URL(`/todos/${id}`, import.meta.env.VITE_TODO_API_URL), {
+      method: 'DELETE'
+    })
+    mutateTodos((todos) => todos.filter((todo) => todo.id !== id))
   }
 
   const handleSaveEdit = async (newTitle) => {
