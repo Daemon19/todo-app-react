@@ -2,14 +2,16 @@ import {
   FaCircleCheck,
   FaRegCircle,
   FaRegPenToSquare,
-  FaRegTrashCan,
+  FaRegTrashCan
 } from 'react-icons/fa6'
 import { useStore } from './useStore'
 import { useState } from 'react'
 import { TodoEdit } from './TodoEdit'
 
 export function Todo({ todo }) {
-  const { key, body, done } = todo
+  const { id, title } = todo
+  // TODO: add done property to todos at the backend
+  const done = false
 
   const [isEditing, setIsEditing] = useState(false)
 
@@ -18,7 +20,7 @@ export function Todo({ todo }) {
   const editTodo = useStore((state) => state.editTodo)
 
   const handleToggleDone = () => {
-    toggleDone(key)
+    toggleDone(id)
   }
 
   const handleEditTodo = () => {
@@ -26,11 +28,11 @@ export function Todo({ todo }) {
   }
 
   const handleDeleteTodo = () => {
-    deleteTodo(key)
+    deleteTodo(id)
   }
 
-  const handleSaveEdit = (newBody) => {
-    editTodo(key, newBody)
+  const handleSaveEdit = (newTitle) => {
+    editTodo(id, newTitle)
     setIsEditing(false)
   }
 
@@ -51,11 +53,11 @@ export function Todo({ todo }) {
           <p
             // Tailwindcss's "break-words" class will not work ¯\_(ツ)_/¯
             style={{
-              wordBreak: 'break-word',
+              wordBreak: 'break-word'
             }}
             className={'w-full ' + (done ? 'line-through ' : '')}
           >
-            {body}
+            {title}
           </p>
           <button
             onClick={handleEditTodo}

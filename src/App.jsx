@@ -3,7 +3,6 @@ import { TodoList } from './TodoList'
 import { TodoForm } from './TodoForm'
 
 function App() {
-  const todos = useStore((state) => state.todos)
   const addTodo = useStore((state) => state.addTodo)
 
   const handleAddTodo = (todo) => {
@@ -16,7 +15,7 @@ function App() {
         <h1 className="relative w-fit mx-auto text-6xl font-bold text-center py-5 px-2 after:absolute after:h-1 after:w-full after:bg-black after:top-[50%] after:left-0">
           Todos
         </h1>
-        <TodoList todos={todos} />
+        <TodoList />
         <TodoForm onAddTodo={handleAddTodo} />
       </div>
     </>
