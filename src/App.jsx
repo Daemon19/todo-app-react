@@ -1,14 +1,7 @@
-import { useStore } from './useStore'
 import { TodoList } from './TodoList'
 import { TodoForm } from './TodoForm'
 
 function App() {
-  const addTodo = useStore((state) => state.addTodo)
-
-  const handleAddTodo = (todo) => {
-    addTodo({ key: window.crypto.randomUUID(), body: todo, done: false })
-  }
-
   return (
     <>
       <div className="mx-auto p-5 pb-24 max-w-screen-sm flex flex-col gap-3">
@@ -16,7 +9,7 @@ function App() {
           Todos
         </h1>
         <TodoList />
-        <TodoForm onAddTodo={handleAddTodo} />
+        <TodoForm />
       </div>
     </>
   )

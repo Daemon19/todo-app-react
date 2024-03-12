@@ -1,10 +1,26 @@
 import { FaPlus } from 'react-icons/fa6'
+import { useSWRConfig } from 'swr'
 
-export function TodoForm({ onAddTodo }) {
-  const handleSubmit = (e) => {
+export function TodoForm() {
+  const { mutate } = useSWRConfig()
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const formData = new FormData(e.target)
-    onAddTodo(formData.get('todo'))
+    const res = await fetch(
+      new URL('/todos', import.meta.env.VITE_TODO_API_URL),
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title: formData.get('title') })
+      }
+    )
+    const body = await res.json()
+    const todo = { id: body.data.id, title: body.data.attributes.title }
+    mutate('/todos', (todos) => [...todos, todo])
     e.target.reset()
   }
 
@@ -12,7 +28,7 @@ export function TodoForm({ onAddTodo }) {
     <>
       <form className="flex gap-1 w-full" onSubmit={handleSubmit}>
         <input
-          name="todo"
+          name="title"
           type="text"
           required
           autoComplete="off"
