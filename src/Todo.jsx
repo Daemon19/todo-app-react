@@ -74,7 +74,9 @@ export function Todo({ todo }) {
             style={{
               wordBreak: 'break-word'
             }}
-            className={'w-full ' + (done ? 'line-through ' : '')}
+            className={
+              'w-full flex items-center' + (done ? 'line-through ' : '')
+            }
           >
             {title}
           </p>
