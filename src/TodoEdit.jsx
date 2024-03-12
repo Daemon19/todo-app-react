@@ -4,7 +4,7 @@ export function TodoEdit({ todo, onSave, onCancel }) {
   const handleSubmit = (e) => {
     e.preventDefault()
     const formData = new FormData(e.target)
-    onSave(formData.get('todo'))
+    onSave(formData.get('title'))
   }
 
   return (
@@ -13,12 +13,12 @@ export function TodoEdit({ todo, onSave, onCancel }) {
       className="flex flex-col gap-2 w-full sm:flex-row"
     >
       <input
-        name="todo"
+        name="title"
         type="text"
         required
         autoFocus
         autoComplete="off"
-        defaultValue={todo.body}
+        defaultValue={todo.title}
         className="block flex-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
       />
       <div className="flex gap-2 justify-end">

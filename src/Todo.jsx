@@ -7,6 +7,7 @@ import {
 import { useStore } from './useStore'
 import { useState } from 'react'
 import { TodoEdit } from './TodoEdit'
+import useTodos from './hooks/useTodos'
 
 export function Todo({ todo }) {
   const { id, title } = todo
@@ -17,7 +18,8 @@ export function Todo({ todo }) {
 
   const toggleDone = useStore((state) => state.toggleDone)
   const deleteTodo = useStore((state) => state.deleteTodo)
-  const editTodo = useStore((state) => state.editTodo)
+
+  const { mutate: mutateTodos } = useTodos()
 
   const handleToggleDone = () => {
     toggleDone(id)
@@ -31,8 +33,23 @@ export function Todo({ todo }) {
     deleteTodo(id)
   }
 
-  const handleSaveEdit = (newTitle) => {
-    editTodo(id, newTitle)
+  const handleSaveEdit = async (newTitle) => {
+    const res = await fetch(
+      new URL(`/todos/${id}`, import.meta.env.VITE_TODO_API_URL),
+      {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title: newTitle })
+      }
+    )
+    const body = await res.json()
+    const newTodo = { id: body.data.id, ...body.data.attributes }
+    mutateTodos((todos) =>
+      todos.map((todo) => (todo.id === newTodo.id ? newTodo : todo))
+    )
     setIsEditing(false)
   }
 
